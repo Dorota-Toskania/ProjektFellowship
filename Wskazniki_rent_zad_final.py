@@ -1,7 +1,10 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# # Wskażniki zadłużenia i rentowności
+# -----------------------------------
+# Downloading libraries
+# -----------------------------------
+
 import pandas as pd
 import numpy as np
 from numpy import inf
@@ -20,7 +23,9 @@ def convert_period_to_year(period):
     # print(year)
     return year
 
-#convert_period_to_year("Y 12.19")
+# -----------------------------------
+# Convert_period_to_year("Y 12.19")
+# -----------------------------------
 
 data_wsk["year"] = data_wsk["period"].map(convert_period_to_year)
 data_wsk['Kapitał Stały'] = data_wsk['I. Kapitał własny'] + data_wsk['1. Zobowiązania długoterminowe']
@@ -29,8 +34,9 @@ data_wsk['Nopat'] = data_wsk['III. EBIT'] - data_wsk['Podatek']
     
 print(data_wsk.columns)
 
-
-# #### Import wskaźniki zadłużenia od Martyny¶
+# -----------------------------------
+# Import wskaźniki zadłużenia od Martyny
+# -----------------------------------
 
 import wskazniki_zadluzenia
 
@@ -40,7 +46,9 @@ zob_dlug = data_wsk["1. Zobowiązania długoterminowe"].values
 kapital_wlasny = data_wsk["I. Kapitał własny"].values
 rsmt = data_wsk["2. Rzeczowe składniki majątku trwałego"].values
 
-# tworzymy nowe kolumny wskaźników zadłużenia
+# -----------------------------------
+# New columns vel wskaźniki zadłużenia
+# -----------------------------------
 
 data_wsk["wog"] = wskazniki_zadluzenia.wog(zob_ogol, aktywa_ogol)
 data_wsk["wzkw"] = wskazniki_zadluzenia.wzkw(zob_ogol, kapital_wlasny)
@@ -56,7 +64,10 @@ kapital_staly = data_wsk['Kapitał Stały'].values
 data_wsk["wsk"] = wskazniki_zadluzenia.wsk(wzkw)
 data_wsk["tsk"] = wskazniki_zadluzenia.tsk(kapital_staly, aktywa_ogol)
 
-# zaokrąglenia
+# -----------------------------------
+# Rounding
+# -----------------------------------
+
 roa = round(data_wsk['V. Zysk netto']/data_wsk['Aktywa ogółem'],6)*100
 roe = round(data_wsk['V. Zysk netto']/data_wsk['I. Kapitał własny'],6)*100
 roic = round(data_wsk['Nopat']/data_wsk['Kapitał Stały'],6)*100
@@ -74,7 +85,10 @@ data_wsk['wsk'] = np.round(wskazniki_zadluzenia.wsk(wzkw), decimals = 6)*100
 data_wsk["tsk"] = np.round(wskazniki_zadluzenia.tsk(kapital_staly, aktywa_ogol), decimals = 6)*100
 
 
-# zamiana nieskończoności
+# -----------------------------------
+# Infinity value
+# -----------------------------------
+
 def zamiana_inf(x):
     x[x==inf] = 0
     x[x==-inf] = 0
@@ -96,10 +110,13 @@ data_wsk['tsk'] = zamiana_inf(data_wsk['tsk'])
 
 # print(data_wsk)
 
-# tworzymy plik, tylko na wybrane kolumny
+# -----------------------------------
+# DataFrame with choosed indicators
+# -----------------------------------
 
 data_wsk = data_wsk[['ticker', 'year','ROA','ROE','ROIC','ROS','ROCE','wog','wzkw','wdzo','wdzkw','wuzd','wpdr','tsk','wsk']].sort_values(by='ticker')
-print(data_wsk)
+
+# print(data_wsk)
 
 
 
