@@ -81,7 +81,6 @@ data_wsk['wpdr'] = np.round(wskazniki_zadluzenia.wpdr(rsmt, zob_dlug), decimals=
 data_wsk['wsk'] = np.round(wskazniki_zadluzenia.wsk(wzkw), decimals=6)*100
 data_wsk["tsk"] = np.round(wskazniki_zadluzenia.tsk(kapital_staly, aktywa_ogol), decimals=6)*100
 
-
 # -----------------------------------
 # Infinity value
 # -----------------------------------

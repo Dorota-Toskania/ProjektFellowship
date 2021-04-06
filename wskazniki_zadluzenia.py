@@ -88,7 +88,6 @@ def wdzkw(zob_dlug: float, kapital_wlasny: float) -> float:
     return zob_dlug / kapital_wlasny
 
 
-
 def wuzd(zob_dlug: float, zob_ogol: float) -> float:
 
     """
