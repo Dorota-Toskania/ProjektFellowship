@@ -1,6 +1,3 @@
-#!/usr/bin/env python
-# coding: utf-8
-
 # -----------------------------------
 # Downloading libraries
 # -----------------------------------
@@ -47,7 +44,7 @@ kapital_wlasny = data_wsk["I. Kapitał własny"].values
 rsmt = data_wsk["2. Rzeczowe składniki majątku trwałego"].values
 
 # -----------------------------------
-# New columns vel wskaźniki zadłużenia
+# New columns vel wskazniki zadluzenia
 # -----------------------------------
 
 data_wsk["wog"] = wskazniki_zadluzenia.wog(zob_ogol, aktywa_ogol)
@@ -68,21 +65,21 @@ data_wsk["tsk"] = wskazniki_zadluzenia.tsk(kapital_staly, aktywa_ogol)
 # Rounding
 # -----------------------------------
 
-roa = round(data_wsk['V. Zysk netto']/data_wsk['Aktywa ogółem'],6)*100
-roe = round(data_wsk['V. Zysk netto']/data_wsk['I. Kapitał własny'],6)*100
-roic = round(data_wsk['Nopat']/data_wsk['Kapitał Stały'],6)*100
-ros = round(data_wsk['V. Zysk netto']/data_wsk['I. Przychody ze sprzedaży'],6)*100
-roce = round(data_wsk['III. EBIT']/data_wsk['Kapitał Stały'],6)*100
+roa = round(data_wsk['V. Zysk netto']/data_wsk['Aktywa ogółem'], 6)*100
+roe = round(data_wsk['V. Zysk netto']/data_wsk['I. Kapitał własny'], 6)*100
+roic = round(data_wsk['Nopat']/data_wsk['Kapitał Stały'], 6)*100
+ros = round(data_wsk['V. Zysk netto']/data_wsk['I. Przychody ze sprzedaży'], 6)*100
+roce = round(data_wsk['III. EBIT']/data_wsk['Kapitał Stały'], 6)*100
 
-data_wsk['wog'] = np.round(wskazniki_zadluzenia.wog(zob_ogol, aktywa_ogol), decimals = 6)*100
-data_wsk['wzkw'] = np.round(wskazniki_zadluzenia.wzkw(zob_ogol, kapital_wlasny), decimals = 6)*100
-data_wsk['wdzo'] = np.round(wskazniki_zadluzenia.wdzo(zob_dlug, aktywa_ogol), decimals = 6)*100
-data_wsk['wdzkw'] = np.round(wskazniki_zadluzenia.wdzkw(zob_dlug, kapital_wlasny), decimals = 6)*100
-data_wsk['wuzd'] = np.round(wskazniki_zadluzenia.wuzd(zob_dlug, zob_ogol), decimals = 6)*100
-data_wsk['wpdr'] = np.round(wskazniki_zadluzenia.wpdr(rsmt, zob_dlug), decimals = 6)*100
+data_wsk['wog'] = np.round(wskazniki_zadluzenia.wog(zob_ogol, aktywa_ogol), decimals=6)*100
+data_wsk['wzkw'] = np.round(wskazniki_zadluzenia.wzkw(zob_ogol, kapital_wlasny), decimals=6)*100
+data_wsk['wdzo'] = np.round(wskazniki_zadluzenia.wdzo(zob_dlug, aktywa_ogol), decimals=6)*100
+data_wsk['wdzkw'] = np.round(wskazniki_zadluzenia.wdzkw(zob_dlug, kapital_wlasny), decimals=6)*100
+data_wsk['wuzd'] = np.round(wskazniki_zadluzenia.wuzd(zob_dlug, zob_ogol), decimals=6)*100
+data_wsk['wpdr'] = np.round(wskazniki_zadluzenia.wpdr(rsmt, zob_dlug), decimals=6)*100
 
-data_wsk['wsk'] = np.round(wskazniki_zadluzenia.wsk(wzkw), decimals = 6)*100
-data_wsk["tsk"] = np.round(wskazniki_zadluzenia.tsk(kapital_staly, aktywa_ogol), decimals = 6)*100
+data_wsk['wsk'] = np.round(wskazniki_zadluzenia.wsk(wzkw), decimals=6)*100
+data_wsk["tsk"] = np.round(wskazniki_zadluzenia.tsk(kapital_staly, aktywa_ogol), decimals=6)*100
 
 
 # -----------------------------------
